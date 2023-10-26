@@ -2,7 +2,7 @@ package pl.miq3l.EmpikApp.domain.user.service;
 
 import org.springframework.stereotype.Service;
 import pl.miq3l.EmpikApp.domain.user.converter.GithubUserResponseDtoToUserResponseDtoConverter;
-import pl.miq3l.EmpikApp.dtos.GithubUserResponseDto;
+import pl.miq3l.EmpikApp.dtos.UserResponseDto;
 import pl.miq3l.EmpikApp.infrastructure.github.GithubIntegrationService;
 
 @Service
@@ -16,7 +16,7 @@ public class UserService {
         this.converter = converter;
     }
 
-    public Object getUser(String login) {
+    public UserResponseDto getUser(String login) {
         return converter.convert(githubIntegrationService.getUserFromGithub(login));
     }
 }
