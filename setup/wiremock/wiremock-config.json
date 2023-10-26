@@ -1,0 +1,8 @@
+{
+  "port" : 8443,
+  "httpsSettings" : {
+    "keyStorePath" : "/var/wiremock/ssl/key.pem",
+    "keyStorePassword" : "lechia",
+    "trustStorePath" : "/var/wiremock/ssl/cert.pem"
+  }
+}

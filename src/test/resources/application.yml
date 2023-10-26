@@ -8,7 +8,7 @@ spring:
 
 integration:
   github:
-    root-url: https://api.github.com
+    root-url: http://localhost:8080
     user-path: /users/{username}
     read-timeout: 10000
     connect-timeout: 10000

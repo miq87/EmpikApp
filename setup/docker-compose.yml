@@ -21,6 +21,20 @@ services:
     networks:
       - empik-net
 
+  wiremock:
+    image: "wiremock/wiremock:latest"
+    container_name: my_wiremock
+    ports:
+      - "8080:8080"
+      - "8443:8443"
+    command: --https-port 8443 --verbose
+    volumes:
+      - ./wiremock:/home/wiremock
+      - ./ssl:/var/wiremock/ssl
+    networks:
+      - empik-net
+
+
 networks:
   empik-net:
     driver: bridge

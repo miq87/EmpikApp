@@ -8,7 +8,6 @@ import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import org.springframework.test.web.client.MockRestServiceServer;
 import org.springframework.web.client.RestTemplate;
-import pl.miq3l.EmpikApp.configuration.properties.GithubIntegrationProperties;
 import pl.miq3l.EmpikApp.dtos.GithubUserResponseDto;
 
 import java.time.LocalDate;
@@ -21,23 +20,22 @@ import static org.springframework.test.web.client.response.MockRestResponseCreat
 @Service
 public class GithubServiceIntegrationMock {
     private final ObjectMapper objectMapper;
-    private final GithubIntegrationProperties properties;
     private final MockRestServiceServer mockServer;
 
     public GithubServiceIntegrationMock(ObjectMapper objectMapper,
-        GithubIntegrationProperties properties,
         @Qualifier("githubRestTemplate") RestTemplate githubRestTemplate) {
         this.mockServer = MockRestServiceServer
             .bindTo(githubRestTemplate)
             .ignoreExpectOrder(true)
             .build();
         this.objectMapper = objectMapper;
-        this.properties = properties;
     }
 
     private void addUsersEndpoint(Object responseObjectBody) {
         mockServer
-            .expect(requestToUriTemplate(properties.getCompleteUserPath(), "xxx"))
+            .expect(requestToUriTemplate(
+                "https://api.github.com/users/{username}",
+                "xxx"))
             .andExpect(method(HttpMethod.GET))
             .andRespond(withStatus(HttpStatus.OK)
                 .contentType(MediaType.APPLICATION_JSON)
